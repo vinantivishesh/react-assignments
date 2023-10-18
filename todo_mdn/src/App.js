@@ -3,9 +3,28 @@ import { nanoid } from 'nanoid';
 import ToDo from './ToDo';
 import Form from './Form';
 import FilterButton from './FilterButton';
+import './style.css';
+
+const FILTER_MAP = {
+  All: () => true,
+  Active: (task) => !task.completed,
+  Completed: (task) => task.completed,
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 export default function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
+  const [filter, setFilter] = useState('All');
+
+  const filterList = FILTER_NAMES.map((filterName) => (
+    <FilterButton
+      name={filterName}
+      key={filterName}
+      isPressed={filterName == filter}
+      setFilter={setFilter}
+    />
+  ));
 
   const toggleTaskCompleted = (id) =>
     setTasks([
@@ -31,17 +50,19 @@ export default function App(props) {
       }),
     ]);
 
-  const taskList = tasks.map((task) => (
-    <ToDo
-      name={task.name}
-      completed={task.completed}
-      id={task.id}
-      key={task.id}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-      editTask={editTask}
-    />
-  ));
+  const taskList = tasks
+    .filter(FILTER_MAP[filter])
+    .map((task) => (
+      <ToDo
+        name={task.name}
+        completed={task.completed}
+        id={task.id}
+        key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ));
 
   const headingText = `${taskList.length} task(s) are remaining`;
 
@@ -50,11 +71,7 @@ export default function App(props) {
       To Do Matic
       <Form addTask={addTask} />
       <div>
-        <div>
-          <FilterButton name="All" />
-          <FilterButton name="Active" />
-          <FilterButton name="Completed" />
-        </div>
+        <div>{filterList}</div>
         <h2>{headingText}</h2>
         <ul>{taskList}</ul>
       </div>

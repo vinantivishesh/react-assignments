@@ -1,17 +1,58 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    padding: 1rem;
-    font-family: system-ui, sans-serif;
-    color: black;
-    background-color: white;
-  }
-  
-  h1 {
-    font-weight: 800;
-    font-size: 1.5rem;
-  }
-  
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: white;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+button {
+  overflow: visible;
+  background: transparent;
+  padding-right: 10px;
+}
+
+.filter {
+  width: 100%;
+  border-width: 1px;
+  border-color: #d3d3d3;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+button,
+input {
+  overflow: visible;
+}
+
+label {
+  text-align: center;
+}
+
+.btn-group {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.filter.toggle-btn[aria-pressed='true'] {
+  text-decoration: underline;
+  border-color: #4d4d4d;
+}
