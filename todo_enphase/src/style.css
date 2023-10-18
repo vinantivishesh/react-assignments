@@ -1,0 +1,12 @@
+.todo-list-header {
+    font-style: inherit;
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  
+  .todo-list-item .todo-list-item {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    margin-left: 17px;
+  }
+  
