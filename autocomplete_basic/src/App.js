@@ -29,7 +29,7 @@ export default function App() {
         <div className="dropdown">
           {data
             .filter((item) => {
-              const searchTerm = value.toLowerCase();
+              const searchTerm = debouncedSearch.toLowerCase();
               const fullName = item.full_name.toLowerCase();
               return searchTerm && fullName.startsWith(searchTerm);
             })
