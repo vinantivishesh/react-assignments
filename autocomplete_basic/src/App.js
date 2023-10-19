@@ -1,31 +1,17 @@
 import React, { useState } from 'react';
+import useDebounce from './hooks/useDebounce';
 
 var data = require('./MOCKDATA.json');
 
 export default function App() {
   const [value, setValue] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
+
+  const debouncedSearch = useDebounce(value, 1000);
 
   const onChange = (e) => {
-    const searchTerm = e.target.value;
-    setValue(searchTerm);
-    if (searchTerm.length) {
-      setShowDropdown(true);
-      setSuggestions(
-        data
-          .filter((item) => {
-            const searchString = searchTerm.toLowerCase();
-            const fullName = item.full_name.toLowerCase();
-            return (
-              searchString &&
-              fullName.startsWith(searchString) &&
-              searchString !== fullName
-            );
-          })
-          .slice(0, 10)
-      );
-    } else setShowDropdown(false);
+    setValue(e.target.value);
+    setShowDropdown(true);
   };
 
   return (
@@ -41,18 +27,25 @@ export default function App() {
 
       {showDropdown && (
         <div className="dropdown">
-          {suggestions.map((item, index) => (
-            <div
-              className="dropdown-row"
-              key={index}
-              onClick={() => {
-                setValue(item.full_name);
-                setShowDropdown(false);
-              }}
-            >
-              {item.full_name}
-            </div>
-          ))}
+          {data
+            .filter((item) => {
+              const searchTerm = value.toLowerCase();
+              const fullName = item.full_name.toLowerCase();
+              return searchTerm && fullName.startsWith(searchTerm);
+            })
+            .slice(0, 10)
+            .map((item, index) => (
+              <div
+                className="dropdown-row"
+                key={index}
+                onClick={() => {
+                  setValue(item.full_name);
+                  setShowDropdown(false);
+                }}
+              >
+                {item.full_name}
+              </div>
+            ))}
         </div>
       )}
     </div>
