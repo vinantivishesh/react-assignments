@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif;
+    background-color: bisque;
+  }
+  
+  form {
+    /* Displays an element as a block-level flex container	 */
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  
+  label {
+    font-size: 12px;
+  }
+  
+  input,
+  textarea {
+    /* Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width */
+    display: block;
+  }
+  
