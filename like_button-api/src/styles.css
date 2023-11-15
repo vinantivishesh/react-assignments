@@ -1,0 +1,40 @@
+.heart {
+    margin-right: 5px;
+  }
+  
+  .like-button {
+    /* fix width not to change when button content changes */
+    width: 80px;
+    border-radius: 20px;
+    border-color: dimgray;
+    /* to have enough space between border and button content */
+    padding: 5px 10px;
+  
+    cursor: pointer;
+  
+    /* items get aligned when display is flex using align-items */
+    display: flex;
+    align-items: center;
+  
+    --default-color: gray;
+    --active-color: red;
+  }
+  
+  .like-button--default {
+    background-color: white;
+    border-color: var(--default-color);
+    color: var(--default-color);
+  }
+  
+  .like-button--default:hover {
+    border-color: var(--active-color);
+    color: var(--active-color);
+  }
+  
+  .like-button--liked,
+  .like-button--liked:hover {
+    background-color: red;
+    border-color: var(--active-color);
+    color: white;
+  }
+  
